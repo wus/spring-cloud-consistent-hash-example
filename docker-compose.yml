@@ -1,0 +1,26 @@
+eureka-server:
+  image:  spring-cloud-consistent-hash-example/eureka-server
+  hostname: eureka-server
+  ports:
+    - "8761:8761"
+
+helloworld-service:
+  image:  spring-cloud-consistent-hash-example/helloworld-service
+  links:
+    - "eureka-server"
+    
+zuul:
+  image:  spring-cloud-consistent-hash-example/zuul
+  ports:
+    - "8060:8060"
+  links:
+    - "eureka-server"
+    - "helloworld-service"
+    
+ribbon:
+  image:  spring-cloud-consistent-hash-example/ribbon
+  ports:
+    - "8888:8888"
+  links:
+    - "eureka-server"
+    - "helloworld-service"

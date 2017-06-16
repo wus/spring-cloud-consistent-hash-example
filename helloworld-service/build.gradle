@@ -1,0 +1,9 @@
+dependencies {
+    compile('org.springframework.cloud:spring-cloud-starter-eureka')
+    compile('org.springframework.cloud:spring-cloud-starter-hystrix')
+    compile('org.springframework.boot:spring-boot-starter-actuator')
+    compile('org.springframework.boot:spring-boot-starter-web');
+    compile('org.springframework.boot:spring-boot-starter-jersey');
+    compile("javax.ws.rs:javax.ws.rs-api:$libs.javax_ws_rs_api");
+    testCompile('org.springframework.boot:spring-boot-starter-test')
+}

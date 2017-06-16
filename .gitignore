@@ -1,0 +1,12 @@
+.DS_Store
+.classpath
+.gradle
+.project
+.settings/
+/**/build/
+/**/target/
+/**/test-output/
+/**/bin/
+/**/logs
+/**/tomcat/
+

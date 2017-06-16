@@ -1,0 +1,70 @@
+buildscript {
+
+    ext.libs = [
+        gradle_docker: '1.2',
+        javax_ws_rs_api: '2.0.1'
+    ]
+
+    repositories {
+        mavenLocal()
+        mavenCentral()
+    }
+    ext {
+        springBootVersion = '1.5.2.RELEASE'
+        springCloudVersion = 'Camden.SR7'
+    }
+    dependencies {
+        classpath("org.springframework.boot:spring-boot-gradle-plugin:${springBootVersion}")
+        classpath("se.transmode.gradle:gradle-docker:$libs.gradle_docker")
+    }
+}
+
+task wrapper(type: Wrapper) {
+    gradleVersion = '3.5'
+}
+
+repositories {
+    mavenLocal()
+    mavenCentral()
+}
+
+subprojects {
+    apply plugin: 'java'
+    apply plugin: 'org.springframework.boot'
+    apply plugin: 'docker'
+
+    sourceCompatibility = JavaVersion.VERSION_1_8
+    targetCompatibility = JavaVersion.VERSION_1_8
+
+    repositories {
+        mavenLocal()
+        mavenCentral()
+    }
+
+    buildscript {
+        repositories {
+            mavenLocal()
+            mavenCentral()
+        }
+        dependencyManagement {
+            imports {
+                mavenBom "org.springframework.cloud:spring-cloud-dependencies:${springCloudVersion}"
+            }
+        }
+    }
+
+    task buildDocker(type: Docker, dependsOn: build) {
+	    //push = true
+	    applicationName = jar.baseName
+	    dockerfile = file('Dockerfile')
+	    doFirst {
+	    	copy {
+		        from jar
+		        into stageDir
+		        rename { String fileName ->
+			        fileName.replace("-${project.version}", "")
+			    }
+	      	}
+	    }
+	}
+}

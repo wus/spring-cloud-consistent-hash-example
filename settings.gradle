@@ -1,0 +1,5 @@
+rootProject.name = 'spring-cloud-consistent-hash-example'
+include "eureka-server"
+include "helloworld-service"
+include "zuul"
+include "ribbon"

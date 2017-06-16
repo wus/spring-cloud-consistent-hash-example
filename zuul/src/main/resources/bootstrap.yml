@@ -1,0 +1,53 @@
+server:
+  port: 8060
+
+spring:
+  application:
+    name: zuul
+
+eureka:
+  instance:
+    hostname: localhost
+  client:
+    registerWithEureka: true
+    fetchRegistry: true
+    serviceUrl:
+            defaultZone: http://localhost:8761/eureka/
+
+zuul:
+  routes:
+    helloworld-service:
+      path: /helloworld-service/**
+      serviceId: helloworld-service
+
+endpoints:
+  shutdown:
+    enabled: true
+---
+spring:
+  profiles: docker
+  application:
+    name: zuul
+
+server:
+  port: 8060
+
+eureka:
+  instance:
+    hostname: zuul
+    prefer-ip-address: true
+  client:
+    registerWithEureka: true
+    fetchRegistry: true
+    serviceUrl:
+            defaultZone: http://eureka-server:8761/eureka/
+
+zuul:
+  routes:
+    helloworld:
+      path: /**
+      serviceId: helloworld-service
+
+endpoints:
+  shutdown:
+    enabled: true
