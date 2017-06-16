@@ -46,7 +46,10 @@ eureka:
     healthcheck:
       enabled: true
     registryFetchIntervalSeconds: 5
-      
+
+ribbon:
+  NFLoadBalancerPingInterval: 3
+     
 helloworld-service:
   ribbon:
     eureka:
