@@ -13,3 +13,8 @@ docker-compose scale helloworld-service=n
 * Spring Cloud Netflix (Eureka, Ribbon)
 * Spring Boot
 * Docker
+
+## Urls
+* Eureka http://localhost:8761/
+* Ribbon Load Balancer http://localhost:8888/hi?cardNumber=130
+* Zuul Load Balancer http://localhost:8060/helloworld-service/helloworld-service/rest/sayhello?cardNumber=123456789
