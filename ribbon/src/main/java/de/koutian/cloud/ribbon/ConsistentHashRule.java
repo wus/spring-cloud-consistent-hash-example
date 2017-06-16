@@ -32,9 +32,8 @@ public class ConsistentHashRule extends AbstractLoadBalancerRule {
         
         while (server == null && count++ < 10) {
             List<Server> reachableServers = lb.getReachableServers();
-            List<Server> allServers = lb.getAllServers();
             cHash.update(reachableServers);
-            if ((reachableServers.size() == 0) || (allServers.size() == 0)) {
+            if ((reachableServers.size() == 0)) {
                 log.warn("No up servers available from load balancer: " + lb);
                 return null;
             }
