@@ -18,8 +18,9 @@ public class ConsistentHashRule extends AbstractLoadBalancerRule {
 
     @Inject
     KeyHolder keyHolder;
-    
-    ConsistentHash cHash = new ConsistentHash();
+
+    @Inject
+    ConsistentHash cHash;
 
     public Server choose(ILoadBalancer lb, Object key) {
     	final String hashKey = keyHolder.getKey();
@@ -62,7 +63,6 @@ public class ConsistentHashRule extends AbstractLoadBalancerRule {
 
 	@Override
 	public Server choose(Object key) {
-		// TODO Auto-generated method stub
 		return choose(getLoadBalancer(), key);
 	}
 
